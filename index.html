@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academic Portfolio | Future Materials Innovator</title>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){document.documentElement.dataset.theme='dark'}</script>
+<style>
+:root{--bg:#0d1117;--surface:#161b22;--line:#30363d;--text:#e6edf3;--muted:#8b949e;--accent:#4ff0c8;--ink:#04201a;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color-scheme:dark}
+:root[data-theme=light]{--bg:#fafaf7;--surface:#fff;--line:#d8dee4;--text:#1f2328;--muted:#59636e;--accent:#087f67;--ink:#fff;color-scheme:light}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:var(--bg);color:var(--text);font:16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:20;background:var(--bg);background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px 16px;min-height:60px;flex-wrap:wrap}
+.logo{font:700 13px var(--mono);letter-spacing:.14em}
+.logo::after{content:".";color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:22px}
+.nav-links a{font:12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:4px 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.nav-links a:hover,.nav-links a.on{color:var(--text);border-color:var(--accent)}
+#theme{background:none;border:1px solid var(--line);color:var(--text);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:14px}
+#theme:hover{border-color:var(--accent)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.35fr .65fr;gap:56px;align-items:center;padding:88px 0 48px;animation:rise .8s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+.eyebrow{font:12px/1.8 var(--mono);letter-spacing:.14em;color:var(--muted)}
+.hero>div:first-child{container-type:inline-size}
+.hero .eyebrow{font-weight:700;font-size:min(12px,1.82cqi);letter-spacing:.02em;white-space:nowrap}
+.email{display:inline-block;margin-top:4px;font:600 13px var(--mono);letter-spacing:.02em;color:var(--accent);border-bottom:1px solid transparent;transition:border-color .2s}
+.email::before{content:"\2709";margin-right:8px}
+.email:hover{border-color:var(--accent)}
+.contact{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-top:4px}
+.contact .email{margin-top:0}
+.email.resume::before{content:"\2261"}
+@container (max-width:450px){.hero .eyebrow{font-size:11px;white-space:normal}}
+.hero .eyebrow::after{content:"\258D";color:var(--accent);margin-left:6px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+h1{font-size:clamp(2.2rem,5.2vw,3.7rem);line-height:1.08;letter-spacing:-.025em;margin:18px 0 20px}
+.neon{color:var(--accent)}
+:root:not([data-theme=light]) .neon{text-shadow:0 0 28px color-mix(in srgb,var(--accent) 45%,transparent)}
+.lead{color:var(--muted);font-size:1.08rem;max-width:56ch}
+.btn{display:inline-flex;align-items:center;gap:12px;margin-top:28px;padding:14px 26px;background:var(--accent);color:var(--ink);font:600 12px var(--mono);letter-spacing:.2em;text-transform:uppercase;border-radius:2px;transition:box-shadow .25s}
+.btn::after{content:"\2192";transition:transform .25s}
+.btn:hover::after{transform:translateX(4px)}
+.btn:hover{box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 25%,transparent)}
+.avatar{position:relative;aspect-ratio:4/5;border:1px solid var(--line);border-radius:16px;display:grid;place-items:center;overflow:hidden;background:linear-gradient(var(--line) 1px,transparent 1px) 0 0/32px 32px,linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/32px 32px,var(--surface)}
+.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.avatar b{font:700 clamp(2.4rem,6vw,3.6rem) var(--mono);letter-spacing:.06em;color:var(--accent)}
+.avatar span{position:absolute;left:14px;bottom:14px;background:var(--bg);border:1px solid var(--line);padding:6px 12px;border-radius:999px;font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+
+/* certificates */
+.cert{position:relative;margin:6px 0 0;aspect-ratio:4/3;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg)}
+.card .cert{margin-top:auto}
+.row .cert{max-width:420px;margin-top:16px}
+.photo{margin:18px 0 0;max-width:560px}
+.card .photo{margin-top:4px}
+#awards .grid{align-items:start}
+.photo img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px}
+.photo figcaption{margin-top:8px;font:12px/1.5 var(--mono);letter-spacing:.03em;color:var(--muted)}
+.cert img{display:block;width:100%;height:100%;object-fit:contain;transition:transform .3s}
+.cert.portrait{aspect-ratio:auto;background:none}
+.cert.portrait img{height:auto}
+.card:hover .cert img,.row:hover .cert img{transform:scale(1.03)}
+.cert figcaption{position:absolute;right:8px;bottom:8px;background:var(--surface);border:1px solid var(--line);padding:3px 9px;border-radius:999px;font:10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.dlg-img{display:block;width:100%;max-height:60vh;object-fit:contain;margin-top:18px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.dlg-img[hidden],.in .ext[hidden]{display:none}
+
+/* intro */
+.intro{margin:18px 0 20px;max-width:60ch}
+.intro p{font-size:clamp(1rem,1.6vw,1.08rem);line-height:1.75}
+.intro p+p{margin-top:14px}
+
+/* personal taglines */
+:root{--city:#6cabdd}
+:root[data-theme=light]{--city:#1f6fae}
+.mottos{margin-bottom:18px;padding:22px 0;border:1px solid var(--line);border-radius:12px;background:radial-gradient(ellipse at 50% 130%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 70%),var(--surface);animation:rise .8s .15s ease both}
+.mq{display:flex;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mq ul{display:flex;flex-shrink:0;align-items:center;list-style:none;padding:0;animation:marquee 18s linear infinite}
+.mq:hover ul{animation-play-state:paused}
+@keyframes marquee{to{transform:translateX(-100%)}}
+.mq li{display:flex;align-items:center;white-space:nowrap;font:800 clamp(1.15rem,3.6vw,2rem)/1.2 var(--sans);letter-spacing:.04em;cursor:default}
+.mq li::after{content:"\2726";display:inline-block;margin:0 clamp(18px,3vw,32px);font-size:.55em;color:var(--city);animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mq span{display:inline-block;color:var(--city)}
+:root:not([data-theme=light]) .mq span{text-shadow:0 0 24px color-mix(in srgb,var(--city) 60%,transparent)}
+@media(prefers-reduced-motion:reduce){.mq{justify-content:center;-webkit-mask-image:none;mask-image:none}.mq li:not(:first-child){display:none}.mq li::after{display:none}}
+
+/* sections */
+section{padding:72px 0 8px}
+h2{font-size:clamp(1.4rem,3vw,1.9rem);letter-spacing:-.01em;margin-bottom:28px}
+h2 .num{font-family:var(--mono);color:var(--accent);font-size:.8em;margin-right:6px}
+.story{border-left:2px solid var(--accent);padding:8px 0 8px 28px;font-size:clamp(1.1rem,2.2vw,1.35rem);line-height:1.7;max-width:62ch}
+.media{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px}
+.media figure{margin:0}
+.media .frame{aspect-ratio:3/4;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#000}
+.media img,.media video{display:block;width:100%;height:100%;object-fit:cover}
+.media img{transition:transform .4s}
+.media figure:hover img{transform:scale(1.03)}
+.media figcaption{margin-top:8px;font:12px/1.5 var(--mono);letter-spacing:.02em;color:var(--muted)}
+@media(max-width:700px){.media{grid-template-columns:repeat(2,1fr);gap:10px}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
+.card,.row{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:26px;cursor:pointer;transition:border-color .2s,transform .2s}
+.card:hover,.row:hover{border-color:var(--accent)}
+.card:hover{transform:translateY(-3px)}
+.card{display:flex;flex-direction:column;gap:10px}
+.badge{font:12px/1.6 var(--mono);letter-spacing:.06em;color:var(--accent)}
+.card h3,.row h3{font-size:1.15rem;line-height:1.35}
+.card p,.row p{color:var(--muted);font-size:.95rem}
+.row{display:grid;grid-template-columns:minmax(180px,260px) 1fr;gap:12px 32px}
+.row h3{margin-bottom:6px}
+.vid{margin-top:18px;max-width:560px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.vid.tall{max-width:340px}
+.vid video{display:block;width:100%;height:auto;background:#000}
+.vid figcaption{padding:10px 14px;border-top:1px solid var(--line);font:12px/1.5 var(--mono);letter-spacing:.03em;color:var(--muted)}
+.ext{display:inline-block;margin-top:14px;font:12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border-bottom:1px solid transparent;transition:border-color .2s}
+.ext::after{content:" \2197"}
+.ext:hover{border-color:var(--accent)}
+
+/* research sub-sections */
+.subh{font-size:clamp(1.1rem,2.2vw,1.3rem);letter-spacing:-.01em;margin:8px 0 20px}
+.subh .num{font-family:var(--mono);color:var(--accent);font-size:.85em;margin-right:6px}
+.sub+.sub{margin-top:64px}
+.proj{display:grid;grid-template-columns:minmax(240px,320px) 1fr;gap:20px 48px;padding:36px 0;border-top:2px solid var(--accent)}
+.proj h4{font-size:clamp(1.2rem,2.4vw,1.45rem);line-height:1.3;margin:6px 0 22px}
+.proj .idx{font:12px var(--mono);letter-spacing:.12em;color:var(--muted)}
+.label{font:600 11px/1.6 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.ov{display:grid;gap:12px}
+.ov dt{font:11px/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ov dd{margin:2px 0 0;font-size:.95rem;line-height:1.5}
+.ov .inl{color:var(--accent);border-bottom:1px solid transparent;transition:border-color .2s}
+.ov .inl:hover{border-color:var(--accent)}
+.proj-lead{font-size:clamp(1.02rem,1.8vw,1.12rem);line-height:1.7;border-left:2px solid var(--accent);padding-left:18px;margin-bottom:18px}
+.proj-body p{color:var(--muted);line-height:1.75}
+.proj-body p+p{margin-top:14px}
+.steps{display:grid;gap:24px;margin:22px 0 26px;max-width:400px}
+.steps figure{margin:0}
+.steps img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px}
+.steps figcaption{display:flex;gap:10px;margin-top:8px;font:12px/1.55 var(--mono);letter-spacing:.02em;color:var(--muted)}
+.steps figcaption span{color:var(--accent);flex:none}
+.proj .slides{margin:0 0 18px}
+.poster{grid-column:1/-1;justify-self:center;width:100%;margin:12px auto 0;max-width:820px}
+.poster figcaption{text-align:center}
+.poster a{display:block;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;transition:border-color .2s}
+.poster a:hover{border-color:var(--accent)}
+.poster img{display:block;width:100%;height:auto}
+.poster figcaption{margin-top:10px;font:12px/1.5 var(--mono);letter-spacing:.03em;color:var(--muted)}
+.proj-photo{grid-column:2;margin:4px 0 0;max-width:400px}
+.proj-photo img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px}
+.proj-video{grid-column:2;margin:4px 0 0;max-width:640px}
+.proj-video video{display:block;width:100%;height:auto;aspect-ratio:16/9;border:1px solid var(--line);border-radius:10px;background:#000}
+.proj-video figcaption,.proj-photo figcaption{margin-top:8px;font:12px/1.55 var(--mono);letter-spacing:.02em;color:var(--muted)}
+@media(max-width:820px){.proj{grid-template-columns:1fr}.proj-photo,.proj-video{grid-column:auto}}
+
+/* leadership & community */
+.philo{margin-bottom:56px}
+.lead-item{padding:32px 0;border-top:2px solid var(--accent);max-width:76ch}
+.lead-item .subh{margin:0}
+.lead-item .ext{margin:6px 0 18px}
+.lead-item p{color:var(--muted);line-height:1.75}
+.lead-item p+p{margin-top:14px}
+.lead-item .vid{margin-top:4px}
+.lead-gap{height:22px}
+.lead-item .photo{max-width:640px;margin-top:22px}
+.curio .photo{max-width:340px}
+.links{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin:6px 0 18px}
+.lead-item .links .ext{margin:0}
+.yt{position:relative;margin-top:22px;max-width:640px;aspect-ratio:16/9;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#000;display:block}
+.yt img{display:block;width:100%;height:100%;object-fit:cover;opacity:.9;transition:opacity .25s,transform .4s}
+.yt:hover img{opacity:1;transform:scale(1.02)}
+.yt .play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 8px color-mix(in srgb,var(--accent) 25%,transparent);transition:transform .25s}
+.yt .play::after{content:"";position:absolute;left:29px;top:22px;border-style:solid;border-width:14px 0 14px 22px;border-color:transparent transparent transparent var(--ink)}
+.yt:hover .play{transform:scale(1.08)}
+.yt+.ext{margin-top:12px}
+
+/* engineering through everyday curiosity */
+.curio{display:grid;gap:40px;max-width:76ch}
+.curio article{border-top:2px solid var(--accent);padding-top:20px}
+.curio h3{font-size:1.15rem;margin-bottom:12px}
+.curio p{color:var(--muted);line-height:1.75;font-size:.97rem}
+
+/* footer */
+footer{margin-top:80px;border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font:12px var(--mono);letter-spacing:.04em}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a:hover{color:var(--accent)}
+
+/* modal */
+dialog{margin:auto;max-width:560px;width:calc(100% - 32px);background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:16px;padding:0;box-shadow:0 24px 80px rgba(0,0,0,.5)}
+dialog::backdrop{background:rgba(1,4,9,.7);backdrop-filter:blur(4px)}
+dialog[open]{animation:pop .25s ease}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}}
+.in{position:relative;padding:32px}
+dialog h3{font-size:1.5rem;line-height:1.3;margin:10px 0 14px;padding-right:36px}
+dialog p{color:var(--muted)}
+.x{position:absolute;top:14px;right:14px;background:none;border:1px solid var(--line);color:var(--text);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:18px;line-height:1}
+.x:hover{border-color:var(--accent)}
+
+@media(max-width:820px){
+ .hero{grid-template-columns:1fr;gap:36px;padding-top:56px}
+ .avatar{max-width:260px;aspect-ratio:1}
+}
+@media(max-width:700px){html{scroll-padding-top:92px}nav .wrap{position:relative;row-gap:0}.logo{line-height:48px;padding-right:44px}#theme{position:absolute;right:24px;top:8px}.nav-links{width:100%;justify-content:space-between;gap:10px;padding-bottom:10px;overflow-x:auto;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}.nav-links a{flex:none;font-size:11px;letter-spacing:.04em;white-space:nowrap}}
+@media(max-width:640px){.row{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+ <a class="logo" href="#">PHAM BUI QUANG MINH</a>
+ <div class="nav-links">
+  <a href="#about">Story</a><a href="#research">Research</a><a href="#olympiads">Olympiads</a><a href="#leadership">Leadership</a><a href="#curiosity">Daily Life</a>
+  <button id="theme" aria-label="Toggle light/dark theme" title="Toggle theme">&#9680;</button>
+ </div>
+</div></nav>
+
+<main class="wrap">
+ <header class="hero">
+  <div>
+   <p class="eyebrow">PHAM BUI QUANG MINH - 12 CHEMISTRY 1 - HANOI-AMSTERDAM HIGH SCHOOL FOR THE GIFTED</p>
+   <div class="contact">
+    <a class="email" href="mailto:qminhams28@gmail.com">qminhams28@gmail.com</a>
+    <a class="email resume" href="resume.pdf" target="_blank" rel="noopener">View my resume</a>
+   </div>
+   <div class="intro">
+    <p>Hi, I'm Minh. People who know me would describe me as persevering, sharp, thoughtful and supportive: I keep going long after a first attempt fails, and I am always there when someone needs a hand. My passion for chemistry began in eighth grade, when “Science Tornado”, my school's science fair, sparked a curiosity that has only grown since.</p>
+    <p>My passion is developing sustainable, chemistry-based materials that make everyday products cleaner, cheaper and more useful.</p>
+    <p>Beyond chemistry, I hold a 1700 Rapid rating on Chess.com, I am a die-hard Manchester City fan, and I once lost 8 kg over a three-month summer break by jogging every single day. I can happily spend hours at the gym, playing football with friends, playing chess online, practicing the piano, cooking up something new in the kitchen, or, I'll admit, scrolling through friends' social media a little longer than I should.</p>
+   </div>
+   <p class="lead">Advanced Materials Researcher | 1590 SAT | 8.0 IELTS | Chess Player and Arbiter</p>
+   <a href="#research" class="btn">Enter Research Lab</a>
+  </div>
+  <!-- Ảnh: avatar.jpg (để cùng thư mục với index.html). Nếu thiếu file, chữ PBQM sẽ hiện thay thế. -->
+  <div class="avatar"><b>PBQM</b><img src="avatar-bali.jpg" width="1000" height="1333" alt="Pham Bui Quang Minh wearing an Asian Chemistry Olympiad T-shirt in Bali, Indonesia" onerror="this.remove()"><span>12 Chemistry 1</span></div>
+ </header>
+
+ <div class="mottos" role="region" aria-label="Personal tagline">
+  <div class="mq">
+   <ul>
+    <li><span>MANCHESTER IS BLUE!</span></li>
+    <li aria-hidden="true"><span>MANCHESTER IS BLUE!</span></li>
+    <li aria-hidden="true"><span>MANCHESTER IS BLUE!</span></li>
+    <li aria-hidden="true"><span>MANCHESTER IS BLUE!</span></li>
+   </ul>
+  </div>
+ </div>
+
+ <section id="about">
+  <h2><span class="num">01 //</span> The Mindset Evolution</h2>
+  <div class="media">
+   <figure><div class="frame"><video controls playsinline preload="metadata" poster="mindset-video.jpg" aria-label="Fire in hand experiment at Science Tornado 2022"><source src="mindset-video.mp4" type="video/mp4"></video></div><figcaption>Taking part in the “fire in hand” experiment at Science Tornado 2022.</figcaption></figure>
+   <figure><div class="frame"><img src="mindset-acho.jpg" width="900" height="1200" alt="Pham Bui Quang Minh with his gold medal and Gold Award certificate at the Asian Chemistry Olympiad 2026" loading="lazy"></div><figcaption>Winning a gold medal at the Asian Chemistry Olympiad 2026.</figcaption></figure>
+   <figure><div class="frame"><img src="mindset-sos.jpg" width="900" height="1200" alt="With children at SOS Children's Village Hai Phong after the volcano and balloon experiments" loading="lazy"></div><figcaption>Hosting a science minigame for children at SOS Children’s Village Hải Phòng.</figcaption></figure>
+   <figure><div class="frame"><img src="mindset-lab.jpg" width="900" height="1200" alt="Working at a hotplate stirrer in the laboratory" loading="lazy"></div><figcaption>Conducting scientific research in the lab.</figcaption></figure>
+  </div>
+  <p class="story">My journey with chemistry began with the basics: learning to write chemical equations and tackling the tedious, repetitive calculations that often define the subject. As I delved into the practical applications of chemistry, my curiosity grew. I became fascinated by the properties of various compounds and the diverse ways they are used in everyday life. I was equally intrigued by the processes by which compounds and metals are formed, both in industrial settings and in the natural world. As my passion grew, I began conducting my own experiments to investigate the characteristics and functions of different compounds under various conditions. This hands-on exploration allowed me to satisfy my curiosity and fulfill my deep-seated longing to truly grasp the fundamental nature of chemistry.</p>
+ </section>
+
+ <section id="research">
+  <h2><span class="num">02 //</span> Research Portfolio</h2>
+  <div class="sub" id="projects">
+   <h3 class="subh"><span class="num">02.1 //</span> Projects</h3>
+   <article class="proj">
+    <div>
+     <div class="idx">PROJECT 01</div>
+     <h4>Silver–Curcumin–Berberine Nanocomplex</h4>
+     <p class="label">Project Overview</p>
+     <dl class="ov">
+      <div><dt>Research title</dt><dd>Process for Producing a Silver Nanoparticle Dual Complex Conjugated with Curcumin and Berberine with Broad-Spectrum Antibacterial Efficacy</dd></div>
+      <div><dt>Research period</dt><dd>Mar – Oct 2026</dd></div>
+      <div><dt>Research field</dt><dd>Biotechnology &amp; Biomedical Materials</dd></div>
+      <div><dt>My role</dt><dd>Co-author</dd></div>
+      <div><dt>Supervisor</dt><dd>Assoc. Prof. Nguyen Tien Dung, PhD</dd></div>
+      <div><dt>Link to paper</dt><dd>Forthcoming on <a class="inl" href="http://wipopublish.ipvietnam.gov.vn/" target="_blank" rel="noopener noreferrer">wipopublish.ipvietnam.gov.vn</a> (Barcode label: 2-2026-01087 HI)</dd></div>
+     </dl>
+    </div>
+    <div>
+     <p class="label">Summary</p>
+     <p class="proj-lead">I co-developed a process for producing silver nanoparticles conjugated with curcumin and berberine inside a protective phospholipid layer, creating a broad-spectrum antibacterial agent at a time when antibiotic resistance has become one of the world’s most serious health threats.</p>
+     <div class="proj-body">
+      <p>The World Health Organization classifies the emergence and spread of antibiotic-resistant bacteria as one of the top ten global public health threats. Bacteria, viruses, fungi and parasites mutate over time and adapt to the very drugs designed to kill them, making common infections harder to treat, prolonging hospital stays, raising healthcare costs and driving up mortality. From 2018 to 2023, resistance grew seriously in more than 40% of the antibiotics closely monitored by health systems, at an average rate of 5–15% per year, and in 2023, one in every six confirmed bacterial infections was caused by a drug-resistant strain.</p>
+      <p>Resistance is spreading far faster than the pharmaceutical industry can develop new classes of antibiotics, so new antibacterial strategies are urgently needed. Our invention, which spans biotechnology, biomedical materials and molecular pharmacology, combines three components in a single nanostructure: a silver nanocore conjugated with curcumin and berberine, two naturally derived compounds, and wrapped in a stable protective phospholipid bilayer. The dual nanocomplex is formed using ultrasonic dispersion and reassembly techniques.</p>
+      <p>To evaluate its antibacterial activity, we used the agar well diffusion method against <em>Escherichia coli</em> and <em>Staphylococcus aureus</em>. All work was carried out in a sterile cabinet, which we first exposed to UV light for at least 15 minutes and wiped down with 70% ethanol, working close to an alcohol burner flame to keep conditions sterile. We poured melted Mueller–Hinton agar into sterile Petri dishes, let it set, and spread each bacterial strain evenly across the surface to form a uniform lawn. Using a sterile copper tube, we punched wells into the agar in a regular polygon pattern so that they were evenly spaced and their inhibition zones would not overlap, then pipetted about 2 µL of the diluted antibacterial solution into each well. The plates were refrigerated for about 8 hours to let the samples diffuse into the agar, then incubated at 30 °C for 2–3 days. Finally, we measured the diameter of the clear inhibition zone around each well to compare how strongly different samples and concentrations suppressed bacterial growth.</p>
+      <p>Because the active components are held together and protected by a phospholipid membrane, the resulting product can be freeze-dried and readily reconstituted, and it exhibits broad-spectrum antibacterial activity. The application was filed with the Intellectual Property Office of Viet Nam on 9 October 2026, and its publication is forthcoming.</p>
+     </div>
+    </div>
+   </article>
+   <article class="proj">
+    <div>
+     <div class="idx">PROJECT 02</div>
+     <h4>CoFe<sub>2</sub>O<sub>4</sub> Nanoparticles</h4>
+     <p class="label">Project Overview</p>
+     <dl class="ov">
+      <div><dt>Research title</dt><dd>Research and Synthesis of CoFe<sub>2</sub>O<sub>4</sub> Materials and Their Application in Drug Delivery</dd></div>
+      <div><dt>Research period</dt><dd>Aug 1 – Aug 31, 2026</dd></div>
+      <div><dt>Research field</dt><dd>Healthcare</dd></div>
+      <div><dt>My role</dt><dd>Team Leader</dd></div>
+      <div><dt>Supervisor</dt><dd>Assoc. Prof. Nguyen Cao Khang, PhD</dd></div>
+     </dl>
+    </div>
+    <div>
+     <a class="ext slides" href="https://drive.google.com/file/d/1zh9Aj4lhLMzhQ1IuUUGAdn-JMgBXoWaF/view" target="_blank" rel="noopener noreferrer">View presentation slides</a>
+     <p class="label">Summary</p>
+     <p class="proj-lead">I synthesized cobalt ferrite (CoFe<sub>2</sub>O<sub>4</sub>) magnetic nanoparticles to test whether they could carry drugs straight to where they are needed, an approach that could lower the doses and side effects of treatments such as chemotherapy.</p>
+     <div class="proj-body">
+      <p>Drugs for cancer, diabetes and heart disease are now used everywhere, but they can kill healthy cells, lower blood pressure, or be cleared from the bloodstream too quickly to work well. Nanoparticle drug delivery systems tackle this by carrying medicine to a precise target and releasing it in a controlled way. Nanoparticles, however, bring problems of their own, such as toxicity, unwanted accumulation in the body and difficult clearance, so a good carrier has to be small, uniform and easy to steer.</p>
+      <p>Our question was whether we could produce water-dispersible, uniformly sized CoFe<sub>2</sub>O<sub>4</sub> nanoparticles with a magnetic response strong enough to be guided by an external magnetic field. We would consider the material promising if it formed a single, well-crystallized phase, kept a consistent nanoscale size, and behaved superparamagnetically with a high saturation magnetization.</p>
+      <p>Our team prepared the particles by chemical co-precipitation. We dissolved 2.91 g of cobalt salt and 5.41 g of iron(III) chloride in 200 mL of distilled water, then added a cooled solution of 4 g of NaOH in 100 mL of water drop by drop under magnetic stirring until the pH reached 9 or above, forming a dark brown precipitate, and kept stirring for another hour. The precipitate was collected by centrifugation at 4,000 rpm, washed with ethanol to reduce clumping and dried at 80–100 °C for 12 hours. Finally, we ground the powder and calcined it at 600–700 °C for 2–3 hours to convert it into crystalline CoFe<sub>2</sub>O<sub>4</sub>. We then characterized the samples with X-ray diffraction (XRD), transmission electron microscopy (TEM) and vibrating sample magnetometry (VSM).</p>
+      <p>XRD showed seven sharp peaks matching CoFe<sub>2</sub>O<sub>4</sub>, confirming a single phase with good crystallinity. TEM revealed consistently sized particles with a median diameter of 14–16 nm, and VSM showed that they are superparamagnetic at room temperature, with a saturation magnetization of about 55 emu/g. These results make the particles a strong candidate for magnetically guided drug delivery. Our next steps are to attach drugs such as antibiotics to the particles and to test magnetic nanoparticles built from metals other than cobalt.</p>
+     </div>
+    </div>
+    <figure class="proj-photo"><img src="cofe-precipitate.jpg" width="800" height="1067" alt="Adding NaOH with a pipette to the dark cobalt and iron salt mixture on a magnetic stirrer" loading="lazy"><figcaption>Adding NaOH dropwise to form the mixed Co(OH)<sub>2</sub> and Fe(OH)<sub>3</sub> precipitate.</figcaption></figure>
+    <figure class="proj-video"><video controls playsinline preload="none" poster="cofe-presentation.jpg" aria-label="Team presentation of the CoFe2O4 drug delivery project"><source src="cofe-presentation.mp4" type="video/mp4"></video><figcaption>Our team’s presentation of the project.</figcaption></figure>
+    <figure class="poster">
+     <a href="poster-cofe2o4.jpg" target="_blank" rel="noopener noreferrer"><img src="poster-cofe2o4.jpg" width="1600" height="2264" alt="Research poster for the CoFe2O4 drug delivery project, AI-JAM US 2026" loading="lazy"></a>
+     <figcaption>Research poster · AI-JAM US 2026 · Click to view full size</figcaption>
+    </figure>
+   </article>
+   <article class="proj">
+    <div>
+     <div class="idx">PROJECT 03</div>
+     <h4>CuO Photovoltaic Materials</h4>
+     <p class="label">Project Overview</p>
+     <dl class="ov">
+      <div><dt>Research title</dt><dd>Copper Oxide Nanomaterials for Solar Energy Harvesting and Photovoltaic Applications</dd></div>
+      <div><dt>Research period</dt><dd>Jun 15 – Jul 16, 2026</dd></div>
+      <div><dt>Research field</dt><dd>Renewable Energy</dd></div>
+      <div><dt>My role</dt><dd>Team Leader</dd></div>
+      <div><dt>Supervisor</dt><dd>Assoc. Prof. Nguyen Cao Khang, PhD</dd></div>
+     </dl>
+    </div>
+    <div>
+     <p class="label">Summary</p>
+     <p class="proj-lead">I synthesized copper oxide (CuO) nanoparticles and tested them as a low-cost light absorber for solar energy, because cheap, eco-friendly photovoltaic materials could help sun-rich countries like Vietnam move toward clean electricity.</p>
+     <div class="proj-body">
+      <p>Global energy demand keeps rising, yet much of the world’s electricity still comes from fossil fuels, while hydroelectric and nuclear power face environmental, supply or safety limits. Solar energy is far more abundant: the sunlight reaching Earth each year far exceeds global energy consumption. Vietnam receives plenty of sunlight, but turning it into electricity requires light-absorbing semiconductors that are both affordable and environmentally safe.</p>
+      <p>We asked whether CuO, a p-type semiconductor with a narrow bandgap, strong visible-light absorption, low cost and good environmental compatibility, could be produced at the nanoscale with properties suited to photovoltaic use. Our objective was to synthesize and characterize CuO nanomaterials and demonstrate a practical application. Success meant particles in the nanometer range, optical properties suited to absorbing sunlight, and a working model that converts solar energy into usable energy.</p>
+      <p>Our team prepared CuO nanomaterials through a controlled chemical synthesis and analyzed their structural and optical properties. We then designed and built a simple experimental model that converts sunlight into other usable forms of energy.</p>
+      <p>We synthesized the nanoparticles by chemical precipitation, using copper(II) sulfate (CuSO<sub>4</sub>·5H<sub>2</sub>O) and sodium hydroxide (NaOH) with standard laboratory equipment: beakers, a magnetic stirrer and stir bar, a balance, a pipette, a centrifuge, an oven, and a mortar and pestle. We first dissolved 0.25 g of CuSO<sub>4</sub>·5H<sub>2</sub>O and 0.4 g of NaOH in distilled water to make 0.005 M and 0.01 M solutions, respectively. While stirring the copper sulfate solution, we added the NaOH solution dropwise at 2 mL per minute and checked the pH with pH paper; once the pH reached 9 or above and the paper turned blue, precipitation was at its maximum. We collected the precipitate by centrifugation at 4,000 rpm for 10 minutes and heated it in an oven at 300 °C for 4 hours. The calcined solid was then crushed with a mortar and pestle, washed with 90% ethanol and dried in an oven at 100 °C for 20 minutes. Finally, we weighed the product to calculate the yield of the process.</p>
+      <div class="steps" aria-label="Photos of the CuO synthesis process">
+       <figure><img src="cuo-step1.jpg" width="800" height="1067" alt="Weighing reagents on a balance in the lab" loading="lazy"><figcaption><span>01</span>Weighing the reagents.</figcaption></figure>
+       <figure><img src="cuo-step2.jpg" width="800" height="1067" alt="Adding NaOH solution to the stirred copper sulfate solution on a magnetic stirrer" loading="lazy"><figcaption><span>02</span>Adding NaOH solution dropwise to the CuSO<sub>4</sub> solution to form a precipitate.</figcaption></figure>
+       <figure><img src="cuo-step3.jpg" width="800" height="1067" alt="Testing the pH of the mixture with a pH paper strip" loading="lazy"><figcaption><span>03</span>Checking the pH with pH paper.</figcaption></figure>
+       <figure><img src="cuo-step4.jpg" width="800" height="1067" alt="Loading a tube of precipitate into the centrifuge" loading="lazy"><figcaption><span>04</span>Centrifuging the precipitate.</figcaption></figure>
+       <figure><img src="cuo-step5.jpg" width="800" height="1067" alt="Setting the temperature on the laboratory oven" loading="lazy"><figcaption><span>05</span>Calcining the precipitate in the oven.</figcaption></figure>
+       <figure><img src="cuo-step6.jpg" width="800" height="1067" alt="Scraping the product from a dish with a brush" loading="lazy"><figcaption><span>06</span>Scraping the calcined product from the dish with a brush to collect it.</figcaption></figure>
+      </div>
+      <p>Under SEM, the synthesized CuO appeared as dense, granular nanoparticles about 30 nm in size, confirming the successful fabrication of a nanoscale semiconductor, and showed favorable optical properties for photovoltaic applications. Our prototype demonstrated that sunlight can serve as a primary energy source for generating electricity and other energy conversions. Together, these results support CuO as a promising material for clean, low-cost solar technologies, especially in countries with abundant sunlight such as Vietnam.</p>
+     </div>
+    </div>
+    <figure class="proj-photo"><img src="wico-gold.jpg" width="928" height="1106" alt="Pham Bui Quang Minh holding the WICO 2026 gold medal and Gold Award certificate on stage" loading="lazy"><figcaption>Receiving the Gold Award at the World Invention Creativity Olympic (WICO) 2026 in Seoul, Korea.</figcaption></figure>
+    <figure class="poster">
+     <a href="poster-cuo.jpg" target="_blank" rel="noopener noreferrer"><img src="poster-cuo.jpg" width="1536" height="2560" alt="Research poster for the copper oxide nanoparticles for solar cells project, WICO 2026" loading="lazy"></a>
+     <figcaption>Research poster · WICO 2026, Seoul · Click to view full size</figcaption>
+    </figure>
+   </article>
+   <article class="proj">
+    <div>
+     <div class="idx">PROJECT 04</div>
+     <h4>SafeDrive+</h4>
+     <p class="label">Project Overview</p>
+     <dl class="ov">
+      <div><dt>Research title</dt><dd>SafeDrive+: A Smart Blood Alcohol Monitoring System Warning System for Drivers</dd></div>
+      <div><dt>Research period</dt><dd>Feb 2026 – Present</dd></div>
+      <div><dt>Research field</dt><dd>IoT in Business</dd></div>
+      <div><dt>My role</dt><dd>Developer</dd></div>
+      <div><dt>Supervisor</dt><dd>Assoc. Prof. Nguyen Cao Khang, PhD</dd></div>
+     </dl>
+    </div>
+    <div>
+     <a class="ext slides" href="https://drive.google.com/file/d/1exM8u58p5tr6kThbD9355h7zjQssR6ti/view" target="_blank" rel="noopener noreferrer">View presentation slides</a>
+     <p class="label">Summary</p>
+     <p class="proj-lead">I am developing a mobile app that estimates a driver’s blood alcohol concentration and warns them before they get behind the wheel, because drunk driving is a major cause of dangerous road accidents.</p>
+     <div class="proj-body">
+      <p>Blood alcohol concentration (BAC) measures how much ethanol is in the blood after drinking. Ethanol is absorbed through the stomach and small intestine and broken down by the liver at a rate that differs from person to person. When intake outpaces the liver, BAC rises and impairs judgment, reflexes and control; at high levels it can even cause loss of consciousness, which makes driving extremely dangerous. Yet most people have no convenient way to check themselves, and tools that rely only on manually entered data are less reliable.</p>
+      <p>SafeDrive+ explores whether a smartphone’s own sensors, combined with an established BAC formula, can give drivers a convenient and trustworthy picture of their condition. The goal is a user-friendly system that helps people check themselves before driving, reducing traffic accidents and raising public awareness. The system shows promise if it can collect real sensor data, calculate BAC reliably and turn the result into clear, timely warnings.</p>
+      <p>So far, the app, built on Thunkable/Flutter, reads acceleration data from the phone and flags patterns typical of impaired driving, such as sudden acceleration, harsh braking and failing to keep a straight line. It calculates BAC using the Widmark formula with experimental correction factors, displays the result with color-coded alerts (green for safe, yellow for caution, red for over the limit), predicts how long the body needs to clear the alcohol, and keeps a history of measurements so users can track their drinking habits. Combining real phone measurements with the algorithm makes the estimate more reliable than manual input alone.</p>
+     </div>
+    </div>
+    <figure class="proj-video"><video controls playsinline preload="none" poster="safedrive-presentation.jpg" aria-label="Minh’s individual online presentation of SafeDrive+"><source src="safedrive-presentation.mp4" type="video/mp4"></video><figcaption>My individual online presentation of the project.</figcaption></figure>
+    <figure class="poster">
+     <a href="poster-safedrive.jpg" target="_blank" rel="noopener noreferrer"><img src="poster-safedrive.jpg" width="1024" height="1536" alt="Project poster for SafeDrive+, a smart BAC monitoring app" loading="lazy"></a>
+     <figcaption>Project poster · SafeDrive+ · Click to view full size</figcaption>
+    </figure>
+   </article>
+  </div>
+  <div class="sub" id="awards">
+  <h3 class="subh"><span class="num">02.2 //</span> Awards</h3>
+  <div class="grid">
+   <article class="card" data-open tabindex="0" role="button">
+    <div class="badge">GRAND PRIX // AI-JAM US // USA</div>
+    <h3>CoFe2O4 Nanoparticles</h3>
+    <p>Synthesized spinel-structured magnetic nanoparticles with biocompatible core-shell coatings for targeted drug delivery.</p>
+    <figure class="cert portrait"><img src="cert-aijam.jpg" width="876" height="1242" alt="AI-JAM US Grand Prix certificate" loading="lazy" onerror="this.parentNode.remove()"><figcaption>Certificate</figcaption></figure>
+   </article>
+   <article class="card" data-open tabindex="0" role="button">
+    <div class="badge">GOLD MEDAL // WICO // KOREA</div>
+    <h3>CuO Photovoltaic Materials</h3>
+    <p>Manipulated microstructural grain boundaries of photovoltaic layers to optimize electron transport efficiency.</p>
+    <figure class="cert portrait"><img src="cert-wico.jpg" width="608" height="862" alt="WICO Gold Medal certificate" loading="lazy" onerror="this.parentNode.remove()"><figcaption>Certificate</figcaption></figure>
+    <figure class="photo"><img src="wico-booth.jpg" width="900" height="1200" alt="Pham Bui Quang Minh at the copper oxide solar cell project booth at WICO 2026" loading="lazy"><figcaption>At the World Invention Creativity Olympic (WICO) 2026 in Seoul, Korea.</figcaption></figure>
+   </article>
+   <article class="card" data-open tabindex="0" role="button">
+    <div class="badge">BRONZE MEDAL // I3O // INDONESIA</div>
+    <h3>SAFEDRIVE+: Smart Blood Alcohol Monitoring and Warning System</h3>
+    <p>Created an app based on the Widmark formula to monitor drivers' blood alcohol concentration and give warnings.</p>
+    <figure class="cert"><img src="cert-i3o.jpg" width="844" height="659" alt="I3O Bronze Medal certificate" loading="lazy" onerror="this.parentNode.remove()"><figcaption>Certificate</figcaption></figure>
+   </article>
+  </div>
+  </div>
+ </section>
+
+ <section id="olympiads">
+  <h2><span class="num">03 //</span> Olympiads</h2>
+  <article class="row" data-open tabindex="0" role="button">
+   <div class="badge">GOLD MEDAL // AChO // INDONESIA</div>
+   <div>
+    <h3>Asian Chemistry Olympiad</h3>
+    <p>Outstandingly ranked among the top 10% of high school contestants, out of more than 200 participants from 12 different countries and territories.</p>
+    <figure class="cert"><img src="cert-acho.jpg" width="890" height="627" alt="AChO Gold Medal certificate" loading="lazy" onerror="this.parentNode.remove()"><figcaption>Certificate</figcaption></figure>
+    <figure class="photo"><img src="acho-team.jpg" width="1200" height="899" alt="Pham Bui Quang Minh and his classmates holding Vietnamese flags in front of the Asian Chemistry Olympiad 2026 welcome banner" loading="lazy"><figcaption>With my classmates at the Asian Chemistry Olympiad 2026 in Bali, Indonesia.</figcaption></figure>
+   </div>
+  </article>
+ </section>
+
+ <section id="leadership">
+  <h2><span class="num">04 //</span> Leadership &amp; Community</h2>
+  <p class="story philo">I am prepared to take on any task that I am confident I can perform to the best of my ability. I'm eager to learn, gain professional experience, and acquire new insights from those around me to improve myself every day. My philosophy is rooted in the principle of “one for the community, and the community for the individual”—I am committed to standing in solidarity with others as we strive toward our shared goals.</p>
+  <div>
+  <article class="lead-item" id="damxanh">
+   <h3 class="subh"><span class="num">04.1 //</span> Dặm Xanh</h3>
+   <a class="ext" href="https://damxanh.top/" target="_blank" rel="noopener noreferrer">damxanh.top</a>
+   <p>I co-founded Dặm Xanh out of a simple belief: healthy eating should not have to come at the expense of convenience, especially for people whose demanding routines leave them little time to care for their nutrition. I wanted to turn that belief into something tangible, so I led a team of 16 to develop the “Healthy Flight Kit,” a meal-box concept featuring Vietnamese ingredients and regional cuisines, with carefully calculated calories and portions tailored to the needs of pilots, flight attendants, and other active professionals.</p>
+   <p>Beyond providing convenient, nutritious meals, I hoped the project could help people better understand the connection between food and health. We organized a public talkshow on the gut microbiome featuring Prof. Dr. Nguyễn Trọng Hưng from the National Institute of Nutrition, bringing together 40 participants to explore how everyday dietary choices affect their well-being. Alongside developing our products and educational activities, we allocated 80% of project proceeds to fund free meals for patients through the charity kitchen at Da Nang Oncology Hospital. From working out the nutritional details of a meal box to figuring out how our proceeds could help put meals on patients’ tables, Dặm Xanh gave me the opportunity to connect my interest in nutrition with the practical work of building a project from the ground up.</p>
+  </article>
+  <article class="lead-item" id="hoarade">
+   <h3 class="subh"><span class="num">04.2 //</span> Hoá Ra Dễ</h3>
+   <a class="ext" href="https://www.facebook.com/clbhrd" target="_blank" rel="noopener noreferrer">Visit the club’s Facebook page</a>
+   <p>I first became interested in Hoá Ra Dễ partly because I couldn’t resist its name: “Hoá” means chemistry, while “hoá ra dễ” means “turns out, it’s easy” in Vietnamese. The wordplay was clever enough to get me through the door; the idea of making chemistry less intimidating kept me there.</p>
+   <p>As Head of Laboratory &amp; Experiments, I led 20 members in preparing demonstrations and standardized 15 hands-on experiments for our CHEMIS-MAS CHALLENGE. I also coordinated a science fair at Hữu Liên Primary School in Lạng Sơn, where more than 150 elementary-school students explored chemical phenomena, and oversaw laboratory preparation for another fair serving 30 students at Quốc Oai A Primary School in Hanoi. I enjoyed seeing children discover that the colorful reactions and unexpected changes they saw in front of them were not magic tricks, but chemistry at work. During our visit to Lạng Sơn, we also supported 60 disadvantaged children with meals and essential medicines. What began with a chemistry pun became an opportunity to share the subject that had fascinated me since middle school.</p>
+   <figure class="photo"><img src="hoarade-huulien.jpg" width="1400" height="933" alt="Hoá Ra Dễ members with students and teachers at Hữu Liên school, holding a board for the 10,000,000 VND scholarship fund" loading="lazy"><figcaption>Presenting the “Vì Ngày Mai Em Lớn Khôn” scholarship fund, worth 10,000,000 VND, to disadvantaged students at Hữu Liên Primary and Secondary School, Hữu Lũng District, Lạng Sơn.</figcaption></figure>
+  </article>
+  <article class="lead-item" id="sos">
+   <h3 class="subh"><span class="num">04.3 //</span> SOS Children’s Village Hải Phòng</h3>
+   <a class="ext" href="https://www.facebook.com/share/p/1TEgwCU4HY/" target="_blank" rel="noopener noreferrer">View our volunteer trip post</a>
+   <figure class="vid tall">
+    <video controls playsinline preload="metadata" poster="volunteer.jpg" aria-label="Footage of the science minigame at SOS Children's Village Hai Phong"><source src="volunteer.mp4" type="video/mp4"></video>
+   </figure>
+   <div class="lead-gap"></div>
+   <p>I noticed that the children at SOS Children’s Village had few opportunities to explore science firsthand, so I came up with the idea of organizing a science-themed minigame to bring chemistry to them through simple, hands-on experiments. I designed the activities, hosted the minigame as MC, and guided the children through making a homemade volcano using vinegar, baking soda, and dishwashing liquid, followed by an experiment that used vinegar and baking soda to inflate a balloon. I also prepared and presented gifts, including school supplies and snacks, to the children.</p>
+   <p>As the mixtures fizzed and the balloon began to inflate, their excitement reminded me of my own middle school days, when I first conducted chemistry experiments in class. Although I had access to better-equipped laboratories and more advanced materials, I recognized the same curiosity in the children as they watched ordinary household ingredients produce unexpected results. Seeing their reactions brought me back to the moment when chemistry first captured my imagination and made me glad I could create a similar opportunity for them.</p>
+  </article>
+  <article class="lead-item" id="chess">
+   <h3 class="subh"><span class="num">04.4 //</span> Chess and Problem Solving</h3>
+   <div class="links">
+    <a class="ext" href="https://www.facebook.com/amschessacademy" target="_blank" rel="noopener noreferrer">Visit Ams Chess Academy on Facebook</a>
+    <a class="ext" href="https://www.chess.com/member/minhpahmthe1st" target="_blank" rel="noopener noreferrer">View my Chess.com profile</a>
+   </div>
+   <p>For me, chess has never been just a game; it is a way of training how I think. Every position is a problem without an answer key: I have to read the board, anticipate how my opponent might respond, calculate several moves ahead and commit to a plan with incomplete information, all against the clock. Reaching a 1700 Rapid rating on Chess.com taught me that progress comes less from brilliant moves than from patience, discipline and honestly reviewing the games I lose.</p>
+   <p>I find the same habits at the heart of engineering. Planning a synthesis feels a lot like planning a game: every decision, from reaction time to precursor concentration, has consequences several steps later, and each choice involves trade-offs between competing goals. Just as a lost game becomes material for analysis, a failed experiment becomes data that points toward a better design. Chess taught me to break a complicated problem into smaller ones, anticipate what could go wrong, and adapt when reality does not match my plan.</p>
+   <p>That love for the game led me to Ams Chess Academy, my school’s chess club, where I was active from September 2023 to August 2025. As part of the club’s expertise team, I helped turn chess knowledge into well-run events: I coordinated tournament preparation for the Hanoi Summer Chess Championship 2025, a city-wide competition that drew nearly 200 players, as well as the Hanoi Chess Tournament 2025, handling player coordination and competition operations.</p>
+   <p>The activity that meant the most to me was organizing chess sessions at Nguyễn Đình Chiểu School for more than 30 students with disabilities. We ran 15 simultaneous games, and I adapted the way I explained the rules and interacted with each student to suit their individual needs. That experience taught me that a good explanation has to fit the person in front of you, and that the problem-solving skills chess builds are most valuable when they are shared.</p>
+  </article>
+  <article class="lead-item" id="olympiams">
+   <h3 class="subh"><span class="num">04.5 //</span> OlympiAms</h3>
+   <a class="ext" href="https://www.facebook.com/OlympiAms/" target="_blank" rel="noopener noreferrer">Visit OlympiAms on Facebook</a>
+   <p>OlympiAms is Hanoi–Amsterdam High School’s internal competition for selecting the students who represent our school on “Road to Mount Olympia”, Vietnam’s national televised academic quiz show. From October 2024 to May 2025, I served as Head of the Logistics Department, responsible for making sure that everything contestants, organizers and the audience needed was in the right place at the right time.</p>
+   <p>I coordinated logistics for the Demo Round in October 2024 and the main OlympiAms 2025 competition, preparing competition equipment, stage materials, floral arrangements and venue setups. Across 3 Semifinals, 1 Play-off and the Grand Final, I oversaw procurement, equipment checks, venue setup and post-event breakdown so that our team was ready for every round. For the Grand Final on 12 April 2025 at Hall 200, I managed on-site logistics and coordinated our members to arrange the stage, seating, check-in area, equipment and audience space.</p>
+   <p>Logistics is the kind of work an audience rarely notices when it goes well. OlympiAms taught me to plan backwards from a deadline, check the smallest details twice, and keep a team calm and coordinated once the lights go on.</p>
+  </article>
+  <article class="lead-item" id="mc">
+   <h3 class="subh"><span class="num">04.6 //</span> MC Skills</h3>
+   <p>Communicating clearly matters to me as much as getting an experiment right. I first took the microphone as the MC of our science minigame at SOS Children’s Village Hải Phòng, and in September 2026 I went on to complete the VietSkill MC training course, organized and taught by editors from Vietnam Television (VTV), where I received a certificate as an outstanding student. The course gave me the chance to practice hosting in a real studio setting, as the recording below shows.</p>
+   <a class="yt" href="https://www.youtube.com/watch?v=Jw3verpgE0g" target="_blank" rel="noopener noreferrer" aria-label="Watch the VietSkill MC studio recording on YouTube">
+    <img src="mc-thumbnail.jpg" width="1344" height="752" alt="Quang Minh presenting in the studio during the VietSkill MC course" loading="lazy"><span class="play"></span>
+   </a>
+   <a class="ext" href="https://www.youtube.com/watch?v=Jw3verpgE0g" target="_blank" rel="noopener noreferrer">Watch the studio recording on YouTube</a>
+  </article>
+  </div>
+ </section>
+
+ <section id="curiosity">
+  <h2><span class="num">05 //</span> Engineering Through Everyday Curiosity</h2>
+  <div class="curio">
+   <article>
+    <h3>Cooking</h3>
+    <p>The kitchen is my favorite everyday laboratory. A recipe reads a lot like an experimental procedure: precise quantities, controlled temperatures, a careful order of steps, and a result that tells you honestly whether you got it right. When I cook, I like to change one variable at a time, such as how long something is heated or how much of an ingredient goes in, and see how it changes texture and flavor. It is the same habit I rely on in my research, and the same attention to detail I brought to calculating calories and portions for Dặm Xanh’s meal boxes.</p>
+    <figure class="photo"><img src="cooking-pizza.jpg" width="800" height="1422" alt="Minh as a sixth grader and his younger brother topping homemade pizzas at the kitchen table" loading="lazy"><figcaption>Me in Grade 6, making pizza with my younger brother at home.</figcaption></figure>
+   </article>
+   <article>
+    <h3>Piano</h3>
+    <p>Playing the piano taught me that precision is built, not given. A difficult passage rarely comes together on the first try, so I break it into small sections, find exactly where it falls apart, and repeat until it holds, much like debugging a process one step at a time. Music also gave me a way to share what I practice; accompanying a friend singing “Thời Thanh Xuân Sẽ Qua” in front of our class reminded me that all the hours of careful repetition are ultimately meant for other people.</p>
+    <figure class="vid">
+     <video controls playsinline preload="metadata" poster="piano.jpg"><source src="piano.mp4" type="video/mp4"></video>
+     <figcaption>Accompanying a friend singing "Thời Thanh Xuân Sẽ Qua" in front of the class.</figcaption>
+    </figure>
+   </article>
+   <article>
+    <h3>Lotion Making</h3>
+    <p>Making lotion turns a simple chemistry idea into something I can actually use every day. A lotion is an emulsion: oil and water that would normally separate, held together by an emulsifier. Each batch is a small experiment in balance, where adjusting the ratio of oil to water or the way the mixture is heated and stirred changes how stable, smooth and light the final product feels. Seeing that a little chemistry can turn into a useful, everyday product connects directly to what I hope to do in the future: design materials that are both practical and sustainable.</p>
+   </article>
+  </div>
+ </section>
+</main>
+
+<footer><div class="wrap">
+ <p>&copy; Pham Bui Quang Minh. 12 Chemistry 1. Hanoi-Amsterdam High School for the Gifted</p>
+ <a href="#">Back to top</a>
+</div></footer>
+
+<dialog id="dlg"><div class="in">
+ <button class="x" aria-label="Close">&times;</button>
+ <div class="badge"></div><h3></h3><p></p>
+ <img class="dlg-img" alt="" hidden>
+ <a class="ext" target="_blank" rel="noopener noreferrer" hidden>View original certificate</a>
+</div></dialog>
+
+<script>
+(function(){
+ var $=function(s,c){return (c||document).querySelector(s)},$$=function(s,c){return [].slice.call((c||document).querySelectorAll(s))};
+ var root=document.documentElement,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+ // theme toggle
+ $('#theme').onclick=function(){var t=root.dataset.theme==='light'?'dark':'light';root.dataset.theme=t;try{localStorage.setItem('theme',t)}catch(e){}};
+
+
+ // tagline: duplicate the list so the ribbon loops seamlessly
+ var mq=$('.mq');
+ if(mq&&!reduce){var cp=mq.firstElementChild.cloneNode(true);cp.setAttribute('aria-hidden','true');mq.appendChild(cp)}
+
+ // highlight current section in nav
+ var links=$$('.nav-links a[href^="#"]'),secs=links.map(function(a){return $(a.getAttribute('href'))});
+ function spy(){var y=scrollY+120,cur=-1;secs.forEach(function(s,i){if(s&&s.offsetTop<=y)cur=i});links.forEach(function(a,i){a.classList.toggle('on',i===cur)})}
+ addEventListener('scroll',spy,{passive:true});spy();
+
+ // project / olympiad details
+ var dlg=$('#dlg');
+ function open(c){
+  $('.badge',dlg).textContent=$('.badge',c).textContent;
+  $('h3',dlg).textContent=$('h3',c).textContent;
+  $('p',dlg).textContent=$('p',c).textContent;
+  var ci=$('.cert img',c),di=$('.dlg-img',dlg),dl=$('.ext',dlg);
+  if(ci){di.src=ci.currentSrc||ci.src;di.alt=ci.alt;dl.href=ci.getAttribute('src');di.hidden=dl.hidden=false}
+  else{di.removeAttribute('src');di.hidden=dl.hidden=true}
+  dlg.showModal?dlg.showModal():dlg.setAttribute('open','');
+ }
+ $$('[data-open]').forEach(function(c){
+  c.addEventListener('click',function(){open(c)});
+  c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(c)}});
+ });
+ $('.x',dlg).onclick=function(){dlg.close()};
+ dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+})();
+</script>
+</body>
+</html>
